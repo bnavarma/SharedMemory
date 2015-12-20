@@ -1,6 +1,7 @@
 #pragma once
 
 constexpr int BranchSize = 50;
+constexpr int MaxSize = 100;
 
 template <class T>
 struct IndexNode {
@@ -23,9 +24,9 @@ class BTree {
 public:
 	IndexNode<A>  *root;
 	void* page_start;
-	pool_allocator<IndexNode<A>> idx_allocator;
-	pool_allocator<LeafNode<A, B>> leaf_allocator;
-	pool_allocator<B> data_allocator;
+	pool_allocator<IndexNode<A>,MaxSize> idx_allocator;
+	pool_allocator<LeafNode<A, B>, MaxSize> leaf_allocator;
+	pool_allocator<B, MaxSize> data_allocator;
 
 	BTree(size_t root_pointer, void* pg_start, size_t idx_alloc_offset, size_t data_alloc_offset, int max_size);
 

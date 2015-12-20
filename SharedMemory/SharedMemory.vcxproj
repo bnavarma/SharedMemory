@@ -66,6 +66,7 @@
   <ItemGroup>
     <ClCompile Include="BTree.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="SharedStack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pool_allocator.cpp" />
@@ -75,6 +76,7 @@
     <ClInclude Include="BTree.h" />
     <ClInclude Include="pool_allocator.h" />
     <ClInclude Include="SharedMemory.h" />
+    <ClInclude Include="SharedStack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
