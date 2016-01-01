@@ -34,9 +34,15 @@ public:
 
 	int search(int key, LeafNode<A, B> node);
 
-	void insert_non_split(int key, IndexNode<A> node, void* data_node);
+	void node_split(IndexNode<A>* node);
 
-	void insert_non_split(int key, LeafNode<A, B> node, B* value);
+	void node_split(LeafNode<A, B>* node);
+
+	void insert_non_split(int key, IndexNode<A>* node, void* data_node);
+
+	void insert_non_split(int key, LeafNode<A, B>* node, B* value);
+
+	void insert_rec(int key, IndexNode<A>* node, void* value);
 
 	void insert(int key, B* value);
 };
