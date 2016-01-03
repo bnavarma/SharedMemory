@@ -1,4 +1,6 @@
 #pragma once
+#include "SharedMemory.h"
+#include "pool_allocator.h"
 
 constexpr int BranchSize = 50;
 constexpr int MaxSize = 100;
@@ -20,7 +22,7 @@ struct LeafNode {
 };
 
 template <class A, class B>
-class BTree {
+class SharedMemory_API BTree {
 public:
 	IndexNode<A>  *root;
 	void* page_start;

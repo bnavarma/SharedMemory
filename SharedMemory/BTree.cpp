@@ -107,7 +107,7 @@ void BTree<A, B>::insert_rec(int key, IndexNode<A>* node, void* value) {
 	if (idx_node != NULL) {
 		if (idx_node->keys[BranchSize - 1] != NULL) {
 			node_split(idx_node);
-			insert_non_split(idx_node->keys[0], node, idx_node->next);
+			insert_non_split(idx_node->next->keys[0], node, idx_node->next);
 		}
 		if (key > idx_node->next->keys[0]) {
 			insert_rec(key, idx_node->next, value);
@@ -121,7 +121,7 @@ void BTree<A, B>::insert_rec(int key, IndexNode<A>* node, void* value) {
 	if (leaf_node != NULL) {
 		if (leaf_node->keys[BranchSize - 1] != NULL) {
 			node_split(leaf_node);
-			insert_non_split(leaf_node->keys[0], node, leaf_node->next);
+			insert_non_split(leaf_node->next->keys[0], node, leaf_node->next);
 		}
 		if (key > leaf_node->next->keys[0]) {
 			insert_non_split(key, leaf_node->next, value);
