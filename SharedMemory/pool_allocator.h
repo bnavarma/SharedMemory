@@ -1,6 +1,6 @@
 #pragma once
-#include "SharedMemory.h"
-#include "SharedStack.h"
+#include "shared_memory.h"
+#include "shared_stack.h"
 
 template <class T, int N>
 class SharedMemory_API pool_allocator {

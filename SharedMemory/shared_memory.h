@@ -13,11 +13,11 @@
 #endif
 
 // This is an example of a class exported from the SharedMemory.dll
-class SharedMemory_API CSharedMemory
+class SharedMemory_API c_shared_memory
 {
 public:
-    CSharedMemory();
-    // TODO: add your methods here.
+	c_shared_memory();
+	// TODO: add your methods here.
 };
 
 // This is an example of an exported variable

@@ -1,14 +1,14 @@
 #include <cstddef>
-#include "SharedStack.h"
+#include "shared_stack.h"
 
 template <class T, int N>
 shared_stack<T, N>::shared_stack(size_t start) {
 	stack_start = start;
-	cur_ptr = start ;
+	cur_ptr = start;
 	if (*cur_ptr == NULL) {
 		*cur_ptr = start + sizeof(size_t);
 	}
-	stack_end = start +sizeof(size_t)+ sizeof(T)*N;
+	stack_end = start + sizeof(size_t) + sizeof(T)*N;
 }
 
 template<class T, int N>

@@ -1,5 +1,5 @@
 #pragma once
-#include "SharedMemory.h"
+#include "shared_memory.h"
 
 template <class T, int N>
 class SharedMemory_API shared_stack {

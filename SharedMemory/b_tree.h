@@ -1,5 +1,5 @@
 #pragma once
-#include "SharedMemory.h"
+#include "shared_memory.h"
 #include "pool_allocator.h"
 
 constexpr int BranchSize = 50;
@@ -22,15 +22,15 @@ struct LeafNode {
 };
 
 template <class A, class B>
-class SharedMemory_API BTree {
+class SharedMemory_API b_tree {
 public:
 	IndexNode<A>  *root;
 	void* page_start;
-	pool_allocator<IndexNode<A>,MaxSize> idx_allocator;
+	pool_allocator<IndexNode<A>, MaxSize> idx_allocator;
 	pool_allocator<LeafNode<A, B>, MaxSize> leaf_allocator;
 	pool_allocator<B, MaxSize> data_allocator;
 
-	BTree(size_t root_pointer, void* pg_start, size_t idx_alloc_offset, size_t data_alloc_offset, int max_size);
+	b_tree(size_t root_pointer, void* pg_start, size_t idx_alloc_offset, size_t data_alloc_offset, int max_size);
 
 	int search(int key, IndexNode<A> node);
 

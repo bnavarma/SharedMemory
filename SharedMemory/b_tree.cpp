@@ -1,9 +1,9 @@
 #include <cstddef>
 #include "pool_allocator.h"
-#include "BTree.h"
+#include "b_tree.h"
 
 template<class A, class B>
-BTree<A, B>::BTree(size_t root_pointer, void* pg_start, size_t idx_alloc_offset, size_t data_alloc_offset, int max_size) {
+b_tree<A, B>::b_tree(size_t root_pointer, void* pg_start, size_t idx_alloc_offset, size_t data_alloc_offset, int max_size) {
 	root = (IndexNode<A>*) root_pointer;
 	page_start = pg_start;
 	idx_allocator = pool_allocator<IndexNode<A>>(pg_start, idx_alloc_offset, idx_alloc_offset + sizeof(void*), max_size);
@@ -13,7 +13,7 @@ BTree<A, B>::BTree(size_t root_pointer, void* pg_start, size_t idx_alloc_offset,
 }
 
 template <class A, class B>
-int BTree<A, B>::search(int key, IndexNode<A> node) {
+int b_tree<A, B>::search(int key, IndexNode<A> node) {
 	auto temp = 0;
 	for (auto i = 0; i < BranchSize; i++) {
 		temp = i;
@@ -28,7 +28,7 @@ int BTree<A, B>::search(int key, IndexNode<A> node) {
 }
 
 template <class A, class B>
-int BTree<A, B>::search(int key, LeafNode<A, B>node) {
+int b_tree<A, B>::search(int key, LeafNode<A, B>node) {
 	for (auto i = 0; i < BranchSize; i++) {
 		if (key == node->keys[i]) {
 			return i;
@@ -41,7 +41,7 @@ int BTree<A, B>::search(int key, LeafNode<A, B>node) {
 }
 
 template<class A, class B>
-void BTree<A, B>::node_split(IndexNode<A>* node) {
+void b_tree<A, B>::node_split(IndexNode<A>* node) {
 	auto temp = idx_allocator.allocate();
 	for (auto i = (BranchSize / 2) + 1; i <= BranchSize; i++) {
 		if (i != BranchSize) {
@@ -58,7 +58,7 @@ void BTree<A, B>::node_split(IndexNode<A>* node) {
 }
 
 template <class A, class B>
-void BTree<A, B>::node_split(LeafNode<A, B>* node) {
+void b_tree<A, B>::node_split(LeafNode<A, B>* node) {
 	auto temp = leaf_allocator.allocate();
 	for (auto i = BranchSize / 2; i < BranchSize; i++) {
 		temp->keys[i - (BranchSize / 2)] = node->keys[i];
@@ -72,7 +72,7 @@ void BTree<A, B>::node_split(LeafNode<A, B>* node) {
 }
 
 template <class A, class B>
-void BTree<A, B>::insert_non_split(int key, IndexNode<A>* node, void* data_node) {
+void b_tree<A, B>::insert_non_split(int key, IndexNode<A>* node, void* data_node) {
 	int idx = search(key, node);
 	for (auto i = BranchSize; i > idx; i--) {
 		if (i == BranchSize) {
@@ -88,7 +88,7 @@ void BTree<A, B>::insert_non_split(int key, IndexNode<A>* node, void* data_node)
 }
 
 template<class A, class B>
-void BTree<A, B>::insert_non_split(int key, LeafNode<A, B>* node, B* data_node) {
+void b_tree<A, B>::insert_non_split(int key, LeafNode<A, B>* node, B* data_node) {
 	int idx = search(key, node);
 	for (auto i = BranchSize - 1; i > idx; i--) {
 		node->keys[i] = node->keys[i - 1];
@@ -99,7 +99,7 @@ void BTree<A, B>::insert_non_split(int key, LeafNode<A, B>* node, B* data_node) 
 }
 
 template <class A, class B>
-void BTree<A, B>::insert_rec(int key, IndexNode<A>* node, void* value) {
+void b_tree<A, B>::insert_rec(int key, IndexNode<A>* node, void* value) {
 	auto idx = search(key, node);
 	void* temp = node->nodes[idx];
 
@@ -133,7 +133,7 @@ void BTree<A, B>::insert_rec(int key, IndexNode<A>* node, void* value) {
 }
 
 template <class A, class B>
-void BTree<A, B>::insert(int key, B* value) {
+void b_tree<A, B>::insert(int key, B* value) {
 	if (root->keys[BranchSize] != NULL) {
 		node_split(root);
 	}

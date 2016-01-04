@@ -64,19 +64,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BTree.cpp" />
+    <ClCompile Include="b_tree.cpp" />
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="SharedStack.cpp" />
+    <ClCompile Include="shared_stack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pool_allocator.cpp" />
-    <ClCompile Include="SharedMemory.cpp" />
+    <ClCompile Include="shared_memory.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BTree.h" />
+    <ClInclude Include="b_tree.h" />
     <ClInclude Include="pool_allocator.h" />
-    <ClInclude Include="SharedMemory.h" />
-    <ClInclude Include="SharedStack.h" />
+    <ClInclude Include="shared_memory.h" />
+    <ClInclude Include="shared_stack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
