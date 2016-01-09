@@ -25,3 +25,26 @@ extern SharedMemory_API int nSharedMemory;
 
 // This is an example of an exported function.
 SharedMemory_API int fnSharedMemory(void);
+
+constexpr int BranchSize = 5;
+constexpr int MaxSize = 100;
+
+struct Node{
+	virtual ~Node(){}
+};
+
+template <class T>
+struct IndexNode : Node{
+	IndexNode<T>* prev;
+	IndexNode<T>* next;
+	T keys[BranchSize];
+	Node* nodes[BranchSize + 1];
+};
+
+template <class A, class B>
+struct LeafNode : Node{
+	LeafNode<A,B>* prev;
+	LeafNode<A,B>* next;
+	A keys[BranchSize];
+	B* values[BranchSize];
+};

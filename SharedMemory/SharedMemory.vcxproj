@@ -64,12 +64,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="b_tree.cpp" />
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="shared_stack.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pool_allocator.cpp" />
     <ClCompile Include="shared_memory.cpp" />
   </ItemGroup>
   <ItemGroup>
